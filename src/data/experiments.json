@@ -1,0 +1,79 @@
+[
+  {
+    "id": "neural-style-transfer",
+    "name": "Real-time Neural Style Transfer",
+    "type": "AI",
+    "description": "Experimenting with fast neural style transfer models for real-time video processing in the browser using WebGL shaders.",
+    "media": [
+      {
+        "type": "gif",
+        "url": "/images/experiments/style-transfer-demo.gif",
+        "alt": "Neural style transfer applied to webcam feed"
+      },
+      {
+        "type": "image",
+        "url": "/images/experiments/style-transfer-results.jpg",
+        "alt": "Comparison of different artistic styles"
+      }
+    ],
+    "results": "Achieved 30fps processing on mid-range GPUs with acceptable quality trade-offs",
+    "status": "completed",
+    "startDate": "2024-09-01",
+    "technologies": ["TensorFlow.js", "WebGL", "React", "MediaPipe"]
+  },
+  {
+    "id": "gesture-recognition",
+    "name": "Hand Gesture 3D Interface",
+    "type": "ML",
+    "description": "Using MediaPipe and custom ML models to create gesture-controlled 3D interfaces that respond to hand movements.",
+    "media": [
+      {
+        "type": "video",
+        "url": "/images/experiments/gesture-demo.mp4",
+        "alt": "Hand gestures controlling 3D objects"
+      }
+    ],
+    "results": "Prototype working with 95% accuracy for 8 basic gestures",
+    "status": "active",
+    "startDate": "2024-11-01",
+    "technologies": ["MediaPipe", "TensorFlow.js", "React Three Fiber", "OpenCV"]
+  },
+  {
+    "id": "procedural-terrain",
+    "name": "Procedural Terrain Generation",
+    "type": "3D",
+    "description": "Exploring real-time procedural terrain generation using noise functions and GPU compute shaders.",
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/experiments/terrain-wireframe.jpg",
+        "alt": "Wireframe view of procedurally generated terrain"
+      },
+      {
+        "type": "image",
+        "url": "/images/experiments/terrain-textured.jpg",
+        "alt": "Textured terrain with multiple biomes"
+      }
+    ],
+    "status": "paused",
+    "startDate": "2024-07-15",
+    "technologies": ["Three.js", "GLSL", "Perlin Noise", "WebGL"]
+  },
+  {
+    "id": "swarm-robotics",
+    "name": "Swarm Intelligence Simulation",
+    "type": "Robotics",
+    "description": "Simulating swarm robotics behaviors using boids algorithm and emergent coordination patterns.",
+    "media": [
+      {
+        "type": "gif",
+        "url": "/images/experiments/swarm-simulation.gif",
+        "alt": "Swarm of autonomous agents coordinating movement"
+      }
+    ],
+    "results": "Successfully demonstrated flocking, foraging, and formation behaviors with 1000+ agents",
+    "status": "completed",
+    "startDate": "2024-06-01",
+    "technologies": ["React Three Fiber", "Web Workers", "Physics Engine", "TypeScript"]
+  }
+]
