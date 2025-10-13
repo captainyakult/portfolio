@@ -15,6 +15,11 @@ export default function Navigation() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
 
+  // Check if this is a non-production environment
+  const isNonProduction =
+    process.env.NODE_ENV !== 'production' ||
+    process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production'
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -35,12 +40,19 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link
-            href="/"
-            className="text-xl font-bold gradient-text hover:scale-105 transition-transform duration-200"
-          >
-            JS
-          </Link>
+          <div className="flex items-center space-x-3">
+            <Link
+              href="/"
+              className="text-xl font-bold gradient-text hover:scale-105 transition-transform duration-200"
+            >
+              JS
+            </Link>
+            {isNonProduction && (
+              <span className="px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full border border-yellow-200">
+                PREVIEW
+              </span>
+            )}
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">

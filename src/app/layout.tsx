@@ -6,6 +6,12 @@ import AgenticHelper from '@/components/AgenticHelper'
 
 const inter = Inter({ subsets: ['latin'] })
 
+// Check if this is a production deployment
+const isProduction =
+  process.env.NODE_ENV === 'production' &&
+  (process.env.VERCEL_URL?.includes('jacksimpson.dev') ||
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production')
+
 export const metadata: Metadata = {
   title: 'Jack Simpson - Interactive Portfolio',
   description:
@@ -45,17 +51,30 @@ export const metadata: Metadata = {
       'Portfolio showcasing 3D visualizations, interactive web engineering, AI experiments, and robotics projects.',
     images: ['/images/og-image.jpg'],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  robots: isProduction
+    ? {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      }
+    : {
+        index: false,
+        follow: false,
+        noindex: true,
+        nofollow: true,
+        googleBot: {
+          index: false,
+          follow: false,
+          noindex: true,
+          nofollow: true,
+        },
+      },
 }
 
 export default function RootLayout({
