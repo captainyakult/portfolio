@@ -7,7 +7,15 @@
     "defaultBranch": "main"
   },
   "files": {
-    "includes": ["src/**/*", "*.js", "*.ts", "*.jsx", "*.tsx", "*.json"],
+    "includes": [
+      "src/**/*",
+      "e2e/**/*",
+      "*.js",
+      "*.ts",
+      "*.jsx",
+      "*.tsx",
+      "*.json"
+    ],
     "ignoreUnknown": false
   },
   "linter": {
