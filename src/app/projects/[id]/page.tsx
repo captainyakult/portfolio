@@ -241,7 +241,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           <h2 className="text-3xl font-bold mb-8 text-text">Project Gallery</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {project.images.map((image, index) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: Image gallery order is stable
               <div
                 key={`project-image-${index}`}
                 className="aspect-video bg-gradient-to-br from-surface to-surface-secondary rounded-xl flex items-center justify-center"

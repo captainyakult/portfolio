@@ -56,7 +56,6 @@ function ProjectPortal({
 
             {/* Floating particles */}
             {Array.from({ length: 6 }).map((_, i) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: Decorative particles with stable count
               <Float
                 key={`portal-particle-${i}`}
                 speed={2 + i * 0.5}
