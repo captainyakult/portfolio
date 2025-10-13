@@ -12,6 +12,7 @@ function BackgroundScene() {
 
       {/* Subtle floating particles */}
       {Array.from({ length: 20 }).map((_, i) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: Decorative particles with stable count
         <Float
           key={`particle-${i}`}
           speed={1 + Math.random()}

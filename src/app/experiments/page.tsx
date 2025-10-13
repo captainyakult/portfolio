@@ -157,6 +157,7 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
       className="relative group h-[450px] cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      // biome-ignore lint/a11y/useSemanticElements: Complex 3D component requires div for proper styling
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {

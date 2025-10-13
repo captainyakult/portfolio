@@ -220,6 +220,7 @@ export default function AgenticHelper() {
           onKeyDown={(e) => {
             if (e.key === 'Escape') setIsOpen(false)
           }}
+          // biome-ignore lint/a11y/useSemanticElements: Backdrop overlay requires div for proper positioning
           role="button"
           tabIndex={0}
           className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm"
