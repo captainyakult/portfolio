@@ -90,7 +90,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <Link href={`/projects/${project.id}`}>
+    <Link
+      href={`/projects/${project.id}`}
+      aria-label={`View ${project.title} project details`}
+    >
       <div
         className="relative group h-96 cursor-pointer overflow-hidden rounded-2xl"
         onMouseEnter={() => setIsHovered(true)}

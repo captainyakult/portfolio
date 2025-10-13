@@ -50,8 +50,17 @@ test.describe('Projects Page', () => {
   test('navigates to project detail page when project is clicked', async ({
     page,
   }) => {
-    // Wait for and click on a project (use the link wrapper)
-    await page.getByRole('link', { name: /interactive 3d portfolio/i }).click()
+    // Wait for and click on a project using the aria-label
+    await page
+      .getByRole('link', {
+        name: /view interactive 3d portfolio project details/i,
+      })
+      .click()
+
+    // Wait for navigation to complete
+    await page.waitForURL('/projects/interactive-3d-portfolio', {
+      timeout: 10000,
+    })
 
     // Should navigate to project detail page
     await expect(page).toHaveURL('/projects/interactive-3d-portfolio')
