@@ -29,15 +29,19 @@ jest.mock('next/image', () => ({
 
 // Mock @react-three/fiber and drei
 jest.mock('@react-three/fiber', () => ({
-  Canvas: ({ children }) => React.createElement('div', { 'data-testid': 'canvas' }, children),
+  Canvas: ({ children }) =>
+    React.createElement('div', { 'data-testid': 'canvas' }, children),
   useFrame: jest.fn(),
   useThree: () => ({ camera: {}, scene: {} }),
 }))
 
 jest.mock('@react-three/drei', () => ({
-  Float: ({ children }) => React.createElement('div', { 'data-testid': 'float' }, children),
-  OrbitControls: () => React.createElement('div', { 'data-testid': 'orbit-controls' }),
-  Text3D: ({ children }) => React.createElement('div', { 'data-testid': 'text3d' }, children),
+  Float: ({ children }) =>
+    React.createElement('div', { 'data-testid': 'float' }, children),
+  OrbitControls: () =>
+    React.createElement('div', { 'data-testid': 'orbit-controls' }),
+  Text3D: ({ children }) =>
+    React.createElement('div', { 'data-testid': 'text3d' }, children),
 }))
 
 // Suppress console warnings during tests

@@ -1,50 +1,77 @@
 'use client'
 
-import { useState, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
-import Link from 'next/link'
-import { Canvas } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { Suspense, useState } from 'react'
 import projectsDataRaw from '@/data/projects.json'
 import type { Project } from '@/types'
 
 const projectsData = projectsDataRaw as Project[]
 
 // 3D Portal Component for project transitions
-function ProjectPortal({ project, index, isHovered }: { project: Project, index: number, isHovered: boolean }) {
+function ProjectPortal({
+  project: _project,
+  index: _index,
+  isHovered,
+}: {
+  project: Project
+  index: number
+  isHovered: boolean
+}) {
   return (
     <Canvas camera={{ position: [0, 0, 8] }}>
       <Suspense fallback={null}>
         <ambientLight intensity={0.4} />
         <pointLight position={[10, 10, 10]} intensity={0.6} />
         <pointLight position={[-5, -5, 5]} intensity={0.3} color="#8b5cf6" />
-        
-        <Float speed={isHovered ? 3 : 1.5} rotationIntensity={isHovered ? 0.8 : 0.3}>
+
+        <Float
+          speed={isHovered ? 3 : 1.5}
+          rotationIntensity={isHovered ? 0.8 : 0.3}
+        >
           <group>
             {/* Main portal ring */}
             <mesh rotation={[0, 0, 0]}>
               <torusGeometry args={[2, 0.1, 16, 100]} />
-              <meshStandardMaterial 
-                color={index % 3 === 0 ? "#3b82f6" : index % 3 === 1 ? "#8b5cf6" : "#06b6d4"}
-                emissive={index % 3 === 0 ? "#1e40af" : index % 3 === 1 ? "#7c3aed" : "#0891b2"}
+              <meshStandardMaterial
+                color={
+                  _index % 3 === 0
+                    ? '#3b82f6'
+                    : _index % 3 === 1
+                      ? '#8b5cf6'
+                      : '#06b6d4'
+                }
+                emissive={
+                  _index % 3 === 0
+                    ? '#1e40af'
+                    : _index % 3 === 1
+                      ? '#7c3aed'
+                      : '#0891b2'
+                }
                 emissiveIntensity={isHovered ? 0.3 : 0.1}
               />
             </mesh>
-            
+
             {/* Floating particles */}
             {Array.from({ length: 6 }).map((_, i) => (
-              <Float key={i} speed={2 + i * 0.5} rotationIntensity={0.2}>
+              <Float
+                key={`portal-particle-${i}`}
+                speed={2 + i * 0.5}
+                rotationIntensity={0.2}
+              >
                 <mesh
                   position={[
                     Math.cos((i / 6) * Math.PI * 2) * 3,
                     Math.sin((i / 6) * Math.PI * 2) * 3,
-                    (Math.random() - 0.5) * 2
+                    (Math.random() - 0.5) * 2,
                   ]}
                 >
                   <sphereGeometry args={[0.1]} />
-                  <meshStandardMaterial 
+                  <meshStandardMaterial
                     color="#ffffff"
-                    transparent 
+                    transparent
                     opacity={0.8}
                     emissive="#ffffff"
                     emissiveIntensity={0.2}
@@ -59,19 +86,30 @@ function ProjectPortal({ project, index, isHovered }: { project: Project, index:
   )
 }
 
-function ProjectCard({ project, index }: { project: Project, index: number }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
     <Link href={`/projects/${project.id}`}>
-      <div 
+      <div
         className="relative group h-96 cursor-pointer overflow-hidden rounded-2xl"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            setIsHovered(!isHovered)
+          }
+        }}
       >
         {/* 3D Portal Background */}
         <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-all duration-700">
-          <ProjectPortal project={project} index={index} isHovered={isHovered} />
+          <ProjectPortal
+            project={project}
+            index={index}
+            isHovered={isHovered}
+          />
         </div>
 
         {/* Card Content */}
@@ -99,7 +137,7 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
           <div className="flex-1 mb-6">
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech) => (
-                <span 
+                <span
                   key={tech}
                   className="px-3 py-1 text-xs bg-surface-secondary text-text-secondary rounded-lg border border-glass-border"
                 >
@@ -112,9 +150,10 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
           {/* Footer */}
           <div className="flex items-center justify-between mt-auto">
             <div className="text-sm text-text-muted">
-              Completed: {new Date(project.completedDate).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short' 
+              Completed:{' '}
+              {new Date(project.completedDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
               })}
             </div>
             <div className="flex gap-2">
@@ -138,38 +177,83 @@ function ProjectCard({ project, index }: { project: Project, index: number }) {
 function ProjectsContent() {
   const searchParams = useSearchParams()
   const showFeatured = searchParams.get('featured') === 'true'
-  
-  const [filter, setFilter] = useState<'all' | 'featured' | 'web' | 'ai' | 'robotics'>(
-    showFeatured ? 'featured' : 'all'
-  )
 
-  const filteredProjects = projectsData.filter(project => {
+  const [filter, setFilter] = useState<
+    'all' | 'featured' | 'web' | 'ai' | 'robotics'
+  >(showFeatured ? 'featured' : 'all')
+
+  const filteredProjects = projectsData.filter((project) => {
     if (filter === 'all') return true
     if (filter === 'featured') return project.featured
-    if (filter === 'web') return project.technologies.some(tech => 
-      ['React', 'Next.js', 'JavaScript', 'TypeScript', 'WebGL', 'Three.js'].includes(tech)
-    )
-    if (filter === 'ai') return project.technologies.some(tech => 
-      ['AI', 'TensorFlow', 'PyTorch', 'Machine Learning', 'Computer Vision'].includes(tech)
-    )
-    if (filter === 'robotics') return project.technologies.some(tech => 
-      ['ROS', 'Arduino', 'Robotics', 'Hardware'].includes(tech)
-    )
+    if (filter === 'web')
+      return project.technologies.some((tech) =>
+        [
+          'React',
+          'Next.js',
+          'JavaScript',
+          'TypeScript',
+          'WebGL',
+          'Three.js',
+        ].includes(tech)
+      )
+    if (filter === 'ai')
+      return project.technologies.some((tech) =>
+        [
+          'AI',
+          'TensorFlow',
+          'PyTorch',
+          'Machine Learning',
+          'Computer Vision',
+        ].includes(tech)
+      )
+    if (filter === 'robotics')
+      return project.technologies.some((tech) =>
+        ['ROS', 'Arduino', 'Robotics', 'Hardware'].includes(tech)
+      )
     return true
   })
 
   const filterOptions = [
     { key: 'all', label: 'All Projects', count: projectsData.length },
-    { key: 'featured', label: 'Featured', count: projectsData.filter(p => p.featured).length },
-    { key: 'web', label: 'Web & 3D', count: projectsData.filter(p => 
-      p.technologies.some(tech => ['React', 'Next.js', 'JavaScript', 'TypeScript', 'WebGL', 'Three.js'].includes(tech))
-    ).length },
-    { key: 'ai', label: 'AI/ML', count: projectsData.filter(p => 
-      p.technologies.some(tech => ['AI', 'TensorFlow', 'PyTorch', 'Machine Learning'].includes(tech))
-    ).length },
-    { key: 'robotics', label: 'Robotics', count: projectsData.filter(p => 
-      p.technologies.some(tech => ['ROS', 'Arduino', 'Robotics'].includes(tech))
-    ).length },
+    {
+      key: 'featured',
+      label: 'Featured',
+      count: projectsData.filter((p) => p.featured).length,
+    },
+    {
+      key: 'web',
+      label: 'Web & 3D',
+      count: projectsData.filter((p) =>
+        p.technologies.some((tech) =>
+          [
+            'React',
+            'Next.js',
+            'JavaScript',
+            'TypeScript',
+            'WebGL',
+            'Three.js',
+          ].includes(tech)
+        )
+      ).length,
+    },
+    {
+      key: 'ai',
+      label: 'AI/ML',
+      count: projectsData.filter((p) =>
+        p.technologies.some((tech) =>
+          ['AI', 'TensorFlow', 'PyTorch', 'Machine Learning'].includes(tech)
+        )
+      ).length,
+    },
+    {
+      key: 'robotics',
+      label: 'Robotics',
+      count: projectsData.filter((p) =>
+        p.technologies.some((tech) =>
+          ['ROS', 'Arduino', 'Robotics'].includes(tech)
+        )
+      ).length,
+    },
   ] as const
 
   return (
@@ -181,8 +265,9 @@ function ProjectsContent() {
             <span className="gradient-text">Projects</span>
           </h1>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-            Exploring the intersection of creativity and technology through interactive experiences, 
-            AI-powered applications, and innovative web solutions.
+            Exploring the intersection of creativity and technology through
+            interactive experiences, AI-powered applications, and innovative web
+            solutions.
           </p>
         </div>
 
@@ -190,6 +275,7 @@ function ProjectsContent() {
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {filterOptions.map(({ key, label, count }) => (
             <button
+              type="button"
               key={key}
               onClick={() => setFilter(key as typeof filter)}
               className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
@@ -215,7 +301,9 @@ function ProjectsContent() {
           <div className="text-center py-20">
             <div className="text-6xl mb-4 opacity-50">🔍</div>
             <h3 className="text-2xl font-semibold mb-2">No projects found</h3>
-            <p className="text-text-secondary">Try adjusting your filter to see more projects.</p>
+            <p className="text-text-secondary">
+              Try adjusting your filter to see more projects.
+            </p>
           </div>
         )}
       </div>
@@ -225,11 +313,13 @@ function ProjectsContent() {
 
 export default function ProjectsPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen pt-24 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen pt-24 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+        </div>
+      }
+    >
       <ProjectsContent />
     </Suspense>
   )

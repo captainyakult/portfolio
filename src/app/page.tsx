@@ -1,6 +1,6 @@
-import Hero from '@/components/Hero'
-import FeaturedWork from '@/components/FeaturedWork'
 import AboutSection from '@/components/AboutSection'
+import FeaturedWork from '@/components/FeaturedWork'
+import Hero from '@/components/Hero'
 
 export default function HomePage() {
   return (

@@ -1,4 +1,4 @@
-import { clamp, lerp, formatDate, generateId, debounce } from '../utils'
+import { clamp, debounce, formatDate, generateId, lerp } from '../utils'
 
 describe('Utils', () => {
   describe('clamp', () => {
@@ -28,7 +28,7 @@ describe('Utils', () => {
     it('generates a unique string ID', () => {
       const id1 = generateId()
       const id2 = generateId()
-      
+
       expect(id1).toMatch(/^[a-z0-9]{9}$/)
       expect(id2).toMatch(/^[a-z0-9]{9}$/)
       expect(id1).not.toBe(id2)
@@ -37,19 +37,19 @@ describe('Utils', () => {
 
   describe('debounce', () => {
     jest.useFakeTimers()
-    
+
     it('debounces function calls', () => {
       const mockFn = jest.fn()
       const debouncedFn = debounce(mockFn, 100)
-      
+
       debouncedFn()
       debouncedFn()
       debouncedFn()
-      
+
       expect(mockFn).not.toHaveBeenCalled()
-      
+
       jest.advanceTimersByTime(100)
-      
+
       expect(mockFn).toHaveBeenCalledTimes(1)
     })
 

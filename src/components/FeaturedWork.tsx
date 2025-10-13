@@ -1,17 +1,21 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { Canvas } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import Link from 'next/link'
 import { Suspense } from 'react'
 import projectsDataRaw from '@/data/projects.json'
 import type { Project } from '@/types'
 
 const projectsData = projectsDataRaw as Project[]
 
-function ProjectCard3D({ project, index }: { project: Project, index: number }) {
+function ProjectCard3D({
+  project,
+  index,
+}: {
+  project: Project
+  index: number
+}) {
   return (
     <div className="relative h-80 group cursor-pointer">
       {/* 3D Background */}
@@ -21,14 +25,17 @@ function ProjectCard3D({ project, index }: { project: Project, index: number }) 
             <ambientLight intensity={0.3} />
             <pointLight position={[5, 5, 5]} intensity={0.5} />
             <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.4}>
-              <mesh
-                position={[0, 0, 0]} 
-                rotation={[0.2, 0.2, 0]}
-              >
+              <mesh position={[0, 0, 0]} rotation={[0.2, 0.2, 0]}>
                 <boxGeometry args={[2, 2, 0.2]} />
-                <meshStandardMaterial 
-                  color={index % 3 === 0 ? "#3b82f6" : index % 3 === 1 ? "#8b5cf6" : "#06b6d4"}
-                  transparent 
+                <meshStandardMaterial
+                  color={
+                    index % 3 === 0
+                      ? '#3b82f6'
+                      : index % 3 === 1
+                        ? '#8b5cf6'
+                        : '#06b6d4'
+                  }
+                  transparent
                   opacity={0.7}
                   roughness={0.2}
                   metalness={0.8}
@@ -45,7 +52,11 @@ function ProjectCard3D({ project, index }: { project: Project, index: number }) 
           {/* Project Image Placeholder */}
           <div className="w-full h-32 bg-gradient-to-br from-surface to-surface-secondary rounded-lg mb-4 flex items-center justify-center">
             <div className="text-4xl opacity-50">
-              {project.title.split(' ').map(word => word[0]).join('').slice(0, 2)}
+              {project.title
+                .split(' ')
+                .map((word) => word[0])
+                .join('')
+                .slice(0, 2)}
             </div>
           </div>
 
@@ -61,7 +72,7 @@ function ProjectCard3D({ project, index }: { project: Project, index: number }) 
             {/* Technologies */}
             <div className="flex flex-wrap gap-2 mb-4">
               {project.technologies.slice(0, 3).map((tech) => (
-                <span 
+                <span
                   key={tech}
                   className="px-2 py-1 text-xs bg-surface-secondary text-text-secondary rounded-md"
                 >
@@ -78,12 +89,18 @@ function ProjectCard3D({ project, index }: { project: Project, index: number }) 
 
           {/* Action Buttons */}
           <div className="flex gap-2 mt-auto">
+            <Link
+              href={`/projects/${project.id}`}
+              className="flex-1 px-3 py-2 bg-gradient-to-r from-primary to-secondary text-white text-sm rounded-lg hover:opacity-80 transition-opacity text-center"
+            >
+              View Details
+            </Link>
             {project.demoLink && (
               <a
                 href={project.demoLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-3 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/80 transition-colors text-center"
+                className="flex-1 px-3 py-2 glass border border-glass-border text-text-secondary text-sm rounded-lg hover:text-text transition-colors text-center"
                 onClick={(e) => e.stopPropagation()}
               >
                 Live Demo
@@ -108,7 +125,7 @@ function ProjectCard3D({ project, index }: { project: Project, index: number }) 
 }
 
 export default function FeaturedWork() {
-  const featuredProjects = projectsData.filter(project => project.featured)
+  const featuredProjects = projectsData.filter((project) => project.featured)
 
   return (
     <div className="relative py-20">
@@ -119,16 +136,27 @@ export default function FeaturedWork() {
             <span className="gradient-text">Featured Work</span>
           </h2>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto mb-8">
-            A selection of projects that showcase my expertise in 3D visualization, 
-            AI integration, and interactive web technologies.
+            A selection of projects that showcase my expertise in 3D
+            visualization, AI integration, and interactive web technologies.
           </p>
-          <Link 
+          <Link
             href="/projects"
             className="inline-flex items-center text-primary hover:text-secondary transition-colors"
           >
             <span>View all projects</span>
-            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <svg
+              className="w-4 h-4 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </Link>
         </div>
@@ -136,19 +164,19 @@ export default function FeaturedWork() {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
           {featuredProjects.map((project, index) => (
-            <Link key={project.id} href={`/projects/${project.id}`}>
-              <ProjectCard3D project={project} index={index} />
-            </Link>
+            <ProjectCard3D key={project.id} project={project} index={index} />
           ))}
         </div>
 
         {/* Call to Action */}
         <div className="text-center">
           <div className="glass border border-glass-border rounded-2xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-semibold mb-4">Interested in working together?</h3>
+            <h3 className="text-2xl font-semibold mb-4">
+              Interested in working together?
+            </h3>
             <p className="text-text-secondary mb-6">
-              I'm always excited to collaborate on innovative projects that push the boundaries 
-              of what's possible with modern web technologies.
+              I'm always excited to collaborate on innovative projects that push
+              the boundaries of what's possible with modern web technologies.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

@@ -7,36 +7,47 @@
   --color-background: #0a0a0f;
   --color-surface: #151520;
   --color-surface-secondary: #1f1f2e;
-  
+
   /* Text colors */
   --color-text: #e4e4e7;
   --color-text-secondary: #a1a1aa;
   --color-text-muted: #71717a;
-  
+
   /* Accent colors */
   --color-primary: #3b82f6;
   --color-secondary: #8b5cf6;
   --color-accent: #06b6d4;
-  
+
   /* Status colors */
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
-  
+
   /* Subtle gradients */
-  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  --gradient-surface: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-secondary) 100%);
-  
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+  --gradient-surface: linear-gradient(
+    135deg,
+    var(--color-surface) 0%,
+    var(--color-surface-secondary) 100%
+  );
+
   /* Glass morphism effects */
   --glass-background: rgba(21, 21, 32, 0.8);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-blur: blur(12px);
-  
+
   /* Shadows and depths */
-  --shadow-subtle: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-large: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  
+  --shadow-subtle:
+    0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-medium:
+    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-large:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
   /* Animation timings */
   --transition-fast: 150ms ease-in-out;
   --transition-medium: 300ms ease-in-out;
@@ -49,11 +60,11 @@
     --color-background: #ffffff;
     --color-surface: #f8fafc;
     --color-surface-secondary: #f1f5f9;
-    
+
     --color-text: #1e293b;
     --color-text-secondary: #475569;
     --color-text-muted: #64748b;
-    
+
     --glass-background: rgba(248, 250, 252, 0.8);
     --glass-border: rgba(0, 0, 0, 0.1);
   }
@@ -72,9 +83,9 @@ body {
   overflow-x: hidden;
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

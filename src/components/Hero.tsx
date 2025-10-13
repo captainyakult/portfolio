@@ -1,9 +1,9 @@
 'use client'
 
-import { Canvas } from '@react-three/fiber'
 import { Float, OrbitControls } from '@react-three/drei'
-import { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 // 3D Scene Component
 function Scene() {
@@ -12,15 +12,15 @@ function Scene() {
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={0.8} />
       <pointLight position={[-10, -10, -10]} intensity={0.3} color="#3b82f6" />
-      
+
       {/* Floating geometric shapes */}
       <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
         <mesh position={[-3, 2, 0]} rotation={[0.5, 0.5, 0]}>
           <boxGeometry args={[0.8, 0.8, 0.8]} />
-          <meshStandardMaterial 
-            color="#3b82f6" 
-            transparent 
-            opacity={0.7} 
+          <meshStandardMaterial
+            color="#3b82f6"
+            transparent
+            opacity={0.7}
             roughness={0.2}
             metalness={0.8}
           />
@@ -30,10 +30,10 @@ function Scene() {
       <Float speed={2} rotationIntensity={0.3} floatIntensity={0.7}>
         <mesh position={[3, -1, -2]} rotation={[0.3, 0.3, 0]}>
           <sphereGeometry args={[0.6]} />
-          <meshStandardMaterial 
-            color="#8b5cf6" 
-            transparent 
-            opacity={0.8} 
+          <meshStandardMaterial
+            color="#8b5cf6"
+            transparent
+            opacity={0.8}
             roughness={0.1}
             metalness={0.9}
           />
@@ -43,18 +43,18 @@ function Scene() {
       <Float speed={1.8} rotationIntensity={0.4} floatIntensity={0.6}>
         <mesh position={[0, -2, 1]} rotation={[0.8, 0.2, 0.5]}>
           <cylinderGeometry args={[0.4, 0.4, 1.2]} />
-          <meshStandardMaterial 
-            color="#06b6d4" 
-            transparent 
-            opacity={0.6} 
+          <meshStandardMaterial
+            color="#06b6d4"
+            transparent
+            opacity={0.6}
             roughness={0.3}
             metalness={0.7}
           />
         </mesh>
       </Float>
 
-      <OrbitControls 
-        enableZoom={false} 
+      <OrbitControls
+        enableZoom={false}
         enablePan={false}
         autoRotate
         autoRotateSpeed={0.5}
@@ -85,8 +85,8 @@ export default function Hero() {
           </h1>
           <p className="text-xl md:text-2xl text-text-secondary mb-8 leading-relaxed">
             Creating interactive experiences at the intersection of{' '}
-            <span className="text-primary font-semibold">3D visualization</span>,{' '}
-            <span className="text-secondary font-semibold">AI</span>, and{' '}
+            <span className="text-primary font-semibold">3D visualization</span>
+            , <span className="text-secondary font-semibold">AI</span>, and{' '}
             <span className="text-accent font-semibold">robotics</span>
           </p>
         </div>

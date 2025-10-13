@@ -36,7 +36,12 @@
     "results": "Prototype working with 95% accuracy for 8 basic gestures",
     "status": "active",
     "startDate": "2024-11-01",
-    "technologies": ["MediaPipe", "TensorFlow.js", "React Three Fiber", "OpenCV"]
+    "technologies": [
+      "MediaPipe",
+      "TensorFlow.js",
+      "React Three Fiber",
+      "OpenCV"
+    ]
   },
   {
     "id": "procedural-terrain",
@@ -74,6 +79,11 @@
     "results": "Successfully demonstrated flocking, foraging, and formation behaviors with 1000+ agents",
     "status": "completed",
     "startDate": "2024-06-01",
-    "technologies": ["React Three Fiber", "Web Workers", "Physics Engine", "TypeScript"]
+    "technologies": [
+      "React Three Fiber",
+      "Web Workers",
+      "Physics Engine",
+      "TypeScript"
+    ]
   }
 ]

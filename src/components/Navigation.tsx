@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import type { NavigationItem } from '@/types'
 
 const navigationItems: NavigationItem[] = [
@@ -35,8 +35,8 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="text-xl font-bold gradient-text hover:scale-105 transition-transform duration-200"
           >
             JS
@@ -51,8 +51,8 @@ export default function Navigation() {
                   key={item.href}
                   href={item.href}
                   className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 hover:text-primary ${
-                    isActive 
-                      ? 'text-primary' 
+                    isActive
+                      ? 'text-primary'
                       : 'text-text-secondary hover:text-text'
                   }`}
                 >
@@ -92,20 +92,33 @@ export default function Navigation() {
   )
 }
 
-function MobileMenu({ items, currentPath }: { items: NavigationItem[], currentPath: string }) {
+function MobileMenu({
+  items,
+  currentPath,
+}: {
+  items: NavigationItem[]
+  currentPath: string
+}) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 text-text-secondary hover:text-text transition-colors duration-200"
         aria-label="Toggle mobile menu"
       >
         <div className="w-6 h-6 flex flex-col justify-center items-center space-y-1">
-          <span className={`w-6 h-0.5 bg-current transition-transform duration-200 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`w-6 h-0.5 bg-current transition-opacity duration-200 ${isOpen ? 'opacity-0' : ''}`} />
-          <span className={`w-6 h-0.5 bg-current transition-transform duration-200 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          <span
+            className={`w-6 h-0.5 bg-current transition-transform duration-200 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}
+          />
+          <span
+            className={`w-6 h-0.5 bg-current transition-opacity duration-200 ${isOpen ? 'opacity-0' : ''}`}
+          />
+          <span
+            className={`w-6 h-0.5 bg-current transition-transform duration-200 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}
+          />
         </div>
       </button>
 
@@ -122,8 +135,8 @@ function MobileMenu({ items, currentPath }: { items: NavigationItem[], currentPa
                     href={item.href}
                     onClick={() => setIsOpen(false)}
                     className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${
-                      isActive 
-                        ? 'text-primary' 
+                      isActive
+                        ? 'text-primary'
                         : 'text-text-secondary hover:text-text'
                     }`}
                   >

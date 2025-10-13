@@ -1,25 +1,37 @@
 'use client'
 
-import { useState } from 'react'
-import { Canvas } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
-import { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { Suspense, useState } from 'react'
 import experimentsDataRaw from '@/data/experiments.json'
 import type { Experiment } from '@/types'
 
 const experimentsData = experimentsDataRaw as Experiment[]
 
 // 3D Scene for experiment cards
-function ExperimentScene({ experiment, isHovered }: { experiment: Experiment, isHovered: boolean }) {
+function ExperimentScene({
+  experiment,
+  isHovered,
+}: {
+  experiment: Experiment
+  isHovered: boolean
+}) {
   const getColorByType = (type: Experiment['type']) => {
     switch (type) {
-      case 'AI': return '#3b82f6'
-      case 'ML': return '#8b5cf6' 
-      case 'Robotics': return '#ef4444'
-      case 'WebGL': return '#06b6d4'
-      case '3D': return '#10b981'
-      case 'Research': return '#f59e0b'
-      default: return '#6b7280'
+      case 'AI':
+        return '#3b82f6'
+      case 'ML':
+        return '#8b5cf6'
+      case 'Robotics':
+        return '#ef4444'
+      case 'WebGL':
+        return '#06b6d4'
+      case '3D':
+        return '#10b981'
+      case 'Research':
+        return '#f59e0b'
+      default:
+        return '#6b7280'
     }
   }
 
@@ -31,15 +43,19 @@ function ExperimentScene({ experiment, isHovered }: { experiment: Experiment, is
         <ambientLight intensity={0.3} />
         <pointLight position={[5, 5, 5]} intensity={0.6} />
         <pointLight position={[-5, -5, 5]} intensity={0.3} color={color} />
-        
-        <Float speed={isHovered ? 2.5 : 1.5} rotationIntensity={0.4} floatIntensity={0.5}>
+
+        <Float
+          speed={isHovered ? 2.5 : 1.5}
+          rotationIntensity={0.4}
+          floatIntensity={0.5}
+        >
           <group>
             {experiment.type === 'AI' && (
               <mesh>
                 <boxGeometry args={[1.5, 1.5, 0.3]} />
-                <meshStandardMaterial 
+                <meshStandardMaterial
                   color={color}
-                  transparent 
+                  transparent
                   opacity={0.8}
                   roughness={0.2}
                   metalness={0.8}
@@ -49,9 +65,9 @@ function ExperimentScene({ experiment, isHovered }: { experiment: Experiment, is
             {experiment.type === 'ML' && (
               <mesh>
                 <sphereGeometry args={[1]} />
-                <meshStandardMaterial 
+                <meshStandardMaterial
                   color={color}
-                  transparent 
+                  transparent
                   opacity={0.7}
                   roughness={0.1}
                   metalness={0.9}
@@ -61,9 +77,9 @@ function ExperimentScene({ experiment, isHovered }: { experiment: Experiment, is
             {experiment.type === 'Robotics' && (
               <mesh>
                 <cylinderGeometry args={[0.8, 0.8, 1.5]} />
-                <meshStandardMaterial 
+                <meshStandardMaterial
                   color={color}
-                  transparent 
+                  transparent
                   opacity={0.8}
                   roughness={0.3}
                   metalness={0.7}
@@ -73,9 +89,9 @@ function ExperimentScene({ experiment, isHovered }: { experiment: Experiment, is
             {(experiment.type === 'WebGL' || experiment.type === '3D') && (
               <mesh>
                 <torusGeometry args={[1.2, 0.3, 16, 100]} />
-                <meshStandardMaterial 
+                <meshStandardMaterial
                   color={color}
-                  transparent 
+                  transparent
                   opacity={0.7}
                   roughness={0.2}
                   metalness={0.8}
@@ -85,9 +101,9 @@ function ExperimentScene({ experiment, isHovered }: { experiment: Experiment, is
             {experiment.type === 'Research' && (
               <mesh>
                 <octahedronGeometry args={[1.2]} />
-                <meshStandardMaterial 
+                <meshStandardMaterial
                   color={color}
-                  transparent 
+                  transparent
                   opacity={0.8}
                   roughness={0.2}
                   metalness={0.8}
@@ -103,33 +119,51 @@ function ExperimentScene({ experiment, isHovered }: { experiment: Experiment, is
 
 function ExperimentCard({ experiment }: { experiment: Experiment }) {
   const [isHovered, setIsHovered] = useState(false)
-  
+
   const getStatusColor = (status: Experiment['status']) => {
     switch (status) {
-      case 'active': return 'bg-primary'
-      case 'completed': return 'bg-success'
-      case 'paused': return 'bg-warning'
-      default: return 'bg-text-muted'
+      case 'active':
+        return 'bg-primary'
+      case 'completed':
+        return 'bg-success'
+      case 'paused':
+        return 'bg-warning'
+      default:
+        return 'bg-text-muted'
     }
   }
 
   const getTypeIcon = (type: Experiment['type']) => {
     switch (type) {
-      case 'AI': return '🤖'
-      case 'ML': return '🧠'
-      case 'Robotics': return '🦾'
-      case 'WebGL': return '🎨'
-      case '3D': return '🎲'
-      case 'Research': return '🔬'
-      default: return '⚡'
+      case 'AI':
+        return '🤖'
+      case 'ML':
+        return '🧠'
+      case 'Robotics':
+        return '🦾'
+      case 'WebGL':
+        return '🎨'
+      case '3D':
+        return '🎲'
+      case 'Research':
+        return '🔬'
+      default:
+        return '⚡'
     }
   }
 
   return (
-    <div 
+    <div
       className="relative group h-[450px] cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          setIsHovered(!isHovered)
+        }
+      }}
     >
       {/* 3D Background */}
       <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-all duration-700 rounded-2xl overflow-hidden">
@@ -149,8 +183,12 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <div className={`w-2 h-2 rounded-full ${getStatusColor(experiment.status)}`} />
-            <span className="text-xs text-text-muted capitalize">{experiment.status}</span>
+            <div
+              className={`w-2 h-2 rounded-full ${getStatusColor(experiment.status)}`}
+            />
+            <span className="text-xs text-text-muted capitalize">
+              {experiment.status}
+            </span>
           </div>
         </div>
 
@@ -168,7 +206,7 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
         <div className="mb-4">
           <div className="flex flex-wrap gap-2">
             {experiment.technologies.slice(0, 4).map((tech) => (
-              <span 
+              <span
                 key={tech}
                 className="px-2 py-1 text-xs bg-surface text-text-secondary rounded border border-glass-border"
               >
@@ -189,10 +227,16 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
             <div className="bg-surface-secondary rounded-lg p-4 h-24 flex items-center justify-center">
               <div className="text-center text-text-muted">
                 <div className="text-2xl mb-1">
-                  {experiment.media[0].type === 'video' ? '🎥' : 
-                   experiment.media[0].type === 'gif' ? '🎬' : '📸'}
+                  {experiment.media[0].type === 'video'
+                    ? '🎥'
+                    : experiment.media[0].type === 'gif'
+                      ? '🎬'
+                      : '📸'}
                 </div>
-                <p className="text-xs">{experiment.media.length} media file{experiment.media.length > 1 ? 's' : ''}</p>
+                <p className="text-xs">
+                  {experiment.media.length} media file
+                  {experiment.media.length > 1 ? 's' : ''}
+                </p>
               </div>
             </div>
           )}
@@ -210,9 +254,10 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
 
         {/* Footer */}
         <div className="text-xs text-text-muted">
-          Started: {new Date(experiment.startDate).toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'short' 
+          Started:{' '}
+          {new Date(experiment.startDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
           })}
         </div>
       </div>
@@ -221,9 +266,11 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
 }
 
 export default function ExperimentsPage() {
-  const [filter, setFilter] = useState<'all' | 'active' | 'completed' | 'paused' | Experiment['type']>('all')
+  const [filter, setFilter] = useState<
+    'all' | 'active' | 'completed' | 'paused' | Experiment['type']
+  >('all')
 
-  const filteredExperiments = experimentsData.filter(experiment => {
+  const filteredExperiments = experimentsData.filter((experiment) => {
     if (filter === 'all') return true
     if (filter === 'active' || filter === 'completed' || filter === 'paused') {
       return experiment.status === filter
@@ -233,12 +280,38 @@ export default function ExperimentsPage() {
 
   const filterOptions = [
     { key: 'all', label: 'All', count: experimentsData.length },
-    { key: 'active', label: 'Active', count: experimentsData.filter(e => e.status === 'active').length },
-    { key: 'completed', label: 'Completed', count: experimentsData.filter(e => e.status === 'completed').length },
-    { key: 'AI', label: 'AI', count: experimentsData.filter(e => e.type === 'AI').length },
-    { key: 'ML', label: 'ML', count: experimentsData.filter(e => e.type === 'ML').length },
-    { key: 'Robotics', label: 'Robotics', count: experimentsData.filter(e => e.type === 'Robotics').length },
-    { key: '3D', label: '3D/WebGL', count: experimentsData.filter(e => e.type === '3D' || e.type === 'WebGL').length },
+    {
+      key: 'active',
+      label: 'Active',
+      count: experimentsData.filter((e) => e.status === 'active').length,
+    },
+    {
+      key: 'completed',
+      label: 'Completed',
+      count: experimentsData.filter((e) => e.status === 'completed').length,
+    },
+    {
+      key: 'AI',
+      label: 'AI',
+      count: experimentsData.filter((e) => e.type === 'AI').length,
+    },
+    {
+      key: 'ML',
+      label: 'ML',
+      count: experimentsData.filter((e) => e.type === 'ML').length,
+    },
+    {
+      key: 'Robotics',
+      label: 'Robotics',
+      count: experimentsData.filter((e) => e.type === 'Robotics').length,
+    },
+    {
+      key: '3D',
+      label: '3D/WebGL',
+      count: experimentsData.filter(
+        (e) => e.type === '3D' || e.type === 'WebGL'
+      ).length,
+    },
   ] as const
 
   return (
@@ -250,8 +323,9 @@ export default function ExperimentsPage() {
             <span className="gradient-text">Experiments</span>
           </h1>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-            Ongoing research and experimental projects exploring the cutting edge of 
-            AI, machine learning, robotics, and interactive technologies.
+            Ongoing research and experimental projects exploring the cutting
+            edge of AI, machine learning, robotics, and interactive
+            technologies.
           </p>
         </div>
 
@@ -259,19 +333,19 @@ export default function ExperimentsPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           <div className="glass border border-glass-border rounded-xl p-4 text-center">
             <div className="text-2xl font-bold gradient-text mb-1">
-              {experimentsData.filter(e => e.status === 'active').length}
+              {experimentsData.filter((e) => e.status === 'active').length}
             </div>
             <div className="text-sm text-text-secondary">Active</div>
           </div>
           <div className="glass border border-glass-border rounded-xl p-4 text-center">
             <div className="text-2xl font-bold gradient-text mb-1">
-              {experimentsData.filter(e => e.status === 'completed').length}
+              {experimentsData.filter((e) => e.status === 'completed').length}
             </div>
             <div className="text-sm text-text-secondary">Completed</div>
           </div>
           <div className="glass border border-glass-border rounded-xl p-4 text-center">
             <div className="text-2xl font-bold gradient-text mb-1">
-              {new Set(experimentsData.flatMap(e => e.technologies)).size}
+              {new Set(experimentsData.flatMap((e) => e.technologies)).size}
             </div>
             <div className="text-sm text-text-secondary">Technologies</div>
           </div>
@@ -287,6 +361,7 @@ export default function ExperimentsPage() {
         <div className="flex flex-wrap justify-center gap-2 mb-12">
           {filterOptions.map(({ key, label, count }) => (
             <button
+              type="button"
               key={key}
               onClick={() => setFilter(key as typeof filter)}
               className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
@@ -311,17 +386,23 @@ export default function ExperimentsPage() {
         {filteredExperiments.length === 0 && (
           <div className="text-center py-20">
             <div className="text-6xl mb-4 opacity-50">🧪</div>
-            <h3 className="text-2xl font-semibold mb-2">No experiments found</h3>
-            <p className="text-text-secondary">Try adjusting your filter to see more experiments.</p>
+            <h3 className="text-2xl font-semibold mb-2">
+              No experiments found
+            </h3>
+            <p className="text-text-secondary">
+              Try adjusting your filter to see more experiments.
+            </p>
           </div>
         )}
 
         {/* Call to Action */}
         <div className="mt-20 text-center">
           <div className="glass border border-glass-border rounded-2xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-semibold mb-4">Have an idea for collaboration?</h3>
+            <h3 className="text-2xl font-semibold mb-4">
+              Have an idea for collaboration?
+            </h3>
             <p className="text-text-secondary mb-6">
-              I'm always interested in exploring new research directions and 
+              I'm always interested in exploring new research directions and
               collaborating on innovative projects.
             </p>
             <a

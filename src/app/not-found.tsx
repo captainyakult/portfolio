@@ -6,9 +6,12 @@ export default function NotFound() {
       <div className="text-center max-w-md mx-auto px-6">
         <div className="text-6xl mb-6">🌌</div>
         <h1 className="text-4xl font-bold mb-4 gradient-text">404</h1>
-        <h2 className="text-2xl font-semibold mb-4 text-text">Page Not Found</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-text">
+          Page Not Found
+        </h2>
         <p className="text-text-secondary mb-8">
-          The page you're looking for seems to have drifted into another dimension.
+          The page you're looking for seems to have drifted into another
+          dimension.
         </p>
         <Link
           href="/"

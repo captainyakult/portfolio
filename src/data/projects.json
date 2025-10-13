@@ -3,8 +3,17 @@
     "id": "interactive-3d-portfolio",
     "title": "Interactive 3D Portfolio",
     "description": "A modern portfolio website built with Next.js and React Three Fiber, featuring subtle 3D animations and portal transitions between sections.",
-    "technologies": ["Next.js", "React Three Fiber", "TypeScript", "Tailwind CSS", "drei"],
-    "images": ["/images/projects/portfolio-hero.jpg", "/images/projects/portfolio-3d.jpg"],
+    "technologies": [
+      "Next.js",
+      "React Three Fiber",
+      "TypeScript",
+      "Tailwind CSS",
+      "drei"
+    ],
+    "images": [
+      "/images/projects/portfolio-hero.jpg",
+      "/images/projects/portfolio-3d.jpg"
+    ],
     "demoLink": "https://jacksimpson.dev",
     "githubLink": "https://github.com/captainyakult/portfolio",
     "featured": true,
@@ -15,7 +24,10 @@
     "title": "AI Data Visualization Tool",
     "description": "An interactive web application for visualizing complex AI model outputs and training metrics in real-time 3D space.",
     "technologies": ["React", "Three.js", "D3.js", "Python", "TensorFlow"],
-    "images": ["/images/projects/ai-viz-main.jpg", "/images/projects/ai-viz-3d.jpg"],
+    "images": [
+      "/images/projects/ai-viz-main.jpg",
+      "/images/projects/ai-viz-3d.jpg"
+    ],
     "demoLink": "https://ai-viz-demo.jacksimpson.dev",
     "githubLink": "https://github.com/captainyakult/ai-visualization",
     "featured": true,
