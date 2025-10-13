@@ -66,15 +66,19 @@ export const metadata: Metadata = {
     : {
         index: false,
         follow: false,
-        noindex: true,
-        nofollow: true,
         googleBot: {
           index: false,
           follow: false,
-          noindex: true,
-          nofollow: true,
         },
       },
+  ...(isProduction
+    ? {}
+    : {
+        other: {
+          robots: 'noindex, nofollow',
+          googlebot: 'noindex, nofollow',
+        },
+      }),
 }
 
 export default function RootLayout({
