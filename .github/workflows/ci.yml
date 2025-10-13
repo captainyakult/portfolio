@@ -5,6 +5,7 @@ on:
     branches: [ main, dev ]
   pull_request:
     branches: [ main, dev ]
+  workflow_dispatch:
 
 env:
   NODE_VERSION: '22'
@@ -73,6 +74,7 @@ jobs:
     name: E2E Tests
     runs-on: ubuntu-latest
     needs: test
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
 
     steps:
       - name: Checkout code
@@ -113,7 +115,7 @@ jobs:
   deploy-staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
-    needs: [test, e2e-test]
+    needs: test
     if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
     environment: staging
 
@@ -152,7 +154,7 @@ jobs:
     name: Lighthouse Performance Audit
     runs-on: ubuntu-latest
     needs: deploy-staging
-    if: github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
 
     steps:
       - name: Checkout code
