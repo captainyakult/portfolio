@@ -63,27 +63,5 @@
     "status": "paused",
     "startDate": "2024-07-15",
     "technologies": ["Three.js", "GLSL", "Perlin Noise", "WebGL"]
-  },
-  {
-    "id": "swarm-robotics",
-    "name": "Swarm Intelligence Simulation",
-    "type": "Robotics",
-    "description": "Simulating swarm robotics behaviors using boids algorithm and emergent coordination patterns.",
-    "media": [
-      {
-        "type": "gif",
-        "url": "/images/experiments/swarm-simulation.gif",
-        "alt": "Swarm of autonomous agents coordinating movement"
-      }
-    ],
-    "results": "Successfully demonstrated flocking, foraging, and formation behaviors with 1000+ agents",
-    "status": "completed",
-    "startDate": "2024-06-01",
-    "technologies": [
-      "React Three Fiber",
-      "Web Workers",
-      "Physics Engine",
-      "TypeScript"
-    ]
   }
 ]

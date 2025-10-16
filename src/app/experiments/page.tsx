@@ -22,8 +22,6 @@ function ExperimentScene({
         return '#3b82f6'
       case 'ML':
         return '#8b5cf6'
-      case 'Robotics':
-        return '#ef4444'
       case 'WebGL':
         return '#06b6d4'
       case '3D':
@@ -71,18 +69,6 @@ function ExperimentScene({
                   opacity={0.7}
                   roughness={0.1}
                   metalness={0.9}
-                />
-              </mesh>
-            )}
-            {experiment.type === 'Robotics' && (
-              <mesh>
-                <cylinderGeometry args={[0.8, 0.8, 1.5]} />
-                <meshStandardMaterial
-                  color={color}
-                  transparent
-                  opacity={0.8}
-                  roughness={0.3}
-                  metalness={0.7}
                 />
               </mesh>
             )}
@@ -139,8 +125,6 @@ function ExperimentCard({ experiment }: { experiment: Experiment }) {
         return '🤖'
       case 'ML':
         return '🧠'
-      case 'Robotics':
-        return '🦾'
       case 'WebGL':
         return '🎨'
       case '3D':
@@ -301,11 +285,6 @@ export default function ExperimentsPage() {
       count: experimentsData.filter((e) => e.type === 'ML').length,
     },
     {
-      key: 'Robotics',
-      label: 'Robotics',
-      count: experimentsData.filter((e) => e.type === 'Robotics').length,
-    },
-    {
       key: '3D',
       label: '3D/WebGL',
       count: experimentsData.filter(
@@ -324,8 +303,7 @@ export default function ExperimentsPage() {
           </h1>
           <p className="text-xl text-text-secondary max-w-3xl mx-auto">
             Ongoing research and experimental projects exploring the cutting
-            edge of AI, machine learning, robotics, and interactive
-            technologies.
+            edge of AI, machine learning, and interactive technologies.
           </p>
         </div>
 

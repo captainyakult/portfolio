@@ -61,7 +61,7 @@ export default function AboutSection() {
       ],
     },
     {
-      category: 'Robotics',
+      category: 'AI',
       items: [
         'ROS',
         'Arduino',
@@ -111,7 +111,7 @@ export default function AboutSection() {
               </p>
               <p>
                 I specialize in creating web-based 3D experiences, developing
-                AI-powered applications, and building robotic systems that
+                AI-powered applications, and building intelligent systems that
                 respond intelligently to their environment.
               </p>
               <p>

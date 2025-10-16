@@ -22,7 +22,6 @@ export const metadata: Metadata = {
     'web development',
     'AI',
     'machine learning',
-    'robotics',
   ],
   authors: [{ name: 'Jack Simpson' }],
   creator: 'Jack Simpson',
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
     siteName: 'Jack Simpson Portfolio',
     title: 'Jack Simpson - Interactive Portfolio',
     description:
-      'Portfolio showcasing 3D visualizations, interactive web engineering, AI experiments, and robotics projects.',
+      'Portfolio showcasing 3D visualizations, interactive web engineering, and AI experiments.',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -48,7 +47,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Jack Simpson - Interactive Portfolio',
     description:
-      'Portfolio showcasing 3D visualizations, interactive web engineering, AI experiments, and robotics projects.',
+      'Portfolio showcasing 3D visualizations, interactive web engineering, and AI experiments.',
     images: ['/images/og-image.jpg'],
   },
   robots: isProduction

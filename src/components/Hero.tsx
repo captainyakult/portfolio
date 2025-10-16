@@ -86,8 +86,11 @@ export default function Hero() {
           <p className="text-xl md:text-2xl text-text-secondary mb-8 leading-relaxed">
             Creating interactive experiences at the intersection of{' '}
             <span className="text-primary font-semibold">3D visualization</span>
-            , <span className="text-secondary font-semibold">AI</span>, and{' '}
-            <span className="text-accent font-semibold">robotics</span>
+            ,{' '}
+            <span className="text-secondary font-semibold">
+              web development
+            </span>
+            , and <span className="text-accent font-semibold">AI</span>
           </p>
         </div>
 
@@ -119,7 +122,7 @@ export default function Hero() {
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold gradient-text mb-2">3</div>
-            <div className="text-text-secondary">Robotics Systems</div>
+            <div className="text-text-secondary">AI Systems</div>
           </div>
         </div>
       </div>

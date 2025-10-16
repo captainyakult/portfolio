@@ -14,7 +14,7 @@ export interface Project {
 export interface Experiment {
   id: string
   name: string
-  type: 'AI' | 'ML' | 'Robotics' | 'WebGL' | '3D' | 'Research'
+  type: 'AI' | 'ML' | 'WebGL' | '3D' | 'Research'
   description: string
   media: {
     type: 'image' | 'video' | 'gif'

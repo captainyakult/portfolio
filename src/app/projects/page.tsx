@@ -181,9 +181,9 @@ function ProjectsContent() {
   const searchParams = useSearchParams()
   const showFeatured = searchParams.get('featured') === 'true'
 
-  const [filter, setFilter] = useState<
-    'all' | 'featured' | 'web' | 'ai' | 'robotics'
-  >(showFeatured ? 'featured' : 'all')
+  const [filter, setFilter] = useState<'all' | 'featured' | 'web' | 'ai'>(
+    showFeatured ? 'featured' : 'all'
+  )
 
   const filteredProjects = projectsData.filter((project) => {
     if (filter === 'all') return true
@@ -208,10 +208,6 @@ function ProjectsContent() {
           'Machine Learning',
           'Computer Vision',
         ].includes(tech)
-      )
-    if (filter === 'robotics')
-      return project.technologies.some((tech) =>
-        ['ROS', 'Arduino', 'Robotics', 'Hardware'].includes(tech)
       )
     return true
   })
@@ -245,15 +241,6 @@ function ProjectsContent() {
       count: projectsData.filter((p) =>
         p.technologies.some((tech) =>
           ['AI', 'TensorFlow', 'PyTorch', 'Machine Learning'].includes(tech)
-        )
-      ).length,
-    },
-    {
-      key: 'robotics',
-      label: 'Robotics',
-      count: projectsData.filter((p) =>
-        p.technologies.some((tech) =>
-          ['ROS', 'Arduino', 'Robotics'].includes(tech)
         )
       ).length,
     },

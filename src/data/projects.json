@@ -32,15 +32,5 @@
     "githubLink": "https://github.com/captainyakult/ai-visualization",
     "featured": true,
     "completedDate": "2024-10-15"
-  },
-  {
-    "id": "robotic-arm-controller",
-    "title": "Robotic Arm Web Controller",
-    "description": "A web-based interface for controlling robotic arms with real-time 3D visualization and inverse kinematics simulation.",
-    "technologies": ["React", "WebGL", "WebRTC", "Python", "ROS"],
-    "images": ["/images/projects/robot-arm-interface.jpg"],
-    "demoLink": "https://robot-controller.jacksimpson.dev",
-    "featured": false,
-    "completedDate": "2024-08-20"
   }
 ]
