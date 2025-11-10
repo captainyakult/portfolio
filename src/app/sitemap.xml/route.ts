@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   // Check if this is a production deployment
   const isProduction =
     process.env.NODE_ENV === 'production' &&
@@ -10,7 +10,10 @@ export async function GET(request: NextRequest) {
   // Only generate sitemap for production
   if (!isProduction) {
     return new NextResponse('Sitemap not available for preview deployments', {
-      status: 404,
+      status: 200,
+      headers: {
+        'Content-Type': 'text/plain',
+      },
     })
   }
 
