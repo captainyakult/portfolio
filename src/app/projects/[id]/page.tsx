@@ -4,7 +4,7 @@ import { Float, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
+import { Suspense, use } from 'react'
 import projectsDataRaw from '@/data/projects.json'
 import type { Project } from '@/types'
 
@@ -85,13 +85,14 @@ function ProjectScene({ project }: { project: Project }) {
 }
 
 interface ProjectPageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = projectsData.find((p) => p.id === params.id)
+  const { id } = use(params)
+  const project = projectsData.find((p) => p.id === id)
 
   if (!project) {
     notFound()

@@ -27,9 +27,9 @@ test.describe('Homepage', () => {
   })
 
   test('displays stats section', async ({ page }) => {
-    await expect(page.getByText('15+')).toBeVisible()
+    await expect(page.getByText('2')).toBeVisible()
     await expect(page.getByText('Interactive Projects')).toBeVisible()
-    await expect(page.getByText('8')).toBeVisible()
+    await expect(page.getByText('3')).toBeVisible()
     await expect(page.getByText('AI Experiments')).toBeVisible()
   })
 
