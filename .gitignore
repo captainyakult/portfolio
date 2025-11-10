@@ -125,4 +125,7 @@ coverage/
 .turbo
 
 # SWC
-.swc/.mcp.json
+.swc/
+
+# MCP Configuration
+.mcp.json
