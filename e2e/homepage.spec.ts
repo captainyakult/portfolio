@@ -27,10 +27,16 @@ test.describe('Homepage', () => {
   })
 
   test('displays stats section', async ({ page }) => {
-    await expect(page.getByText('2')).toBeVisible()
-    await expect(page.getByText('Interactive Projects')).toBeVisible()
-    await expect(page.getByText('3')).toBeVisible()
-    await expect(page.getByText('AI Experiments')).toBeVisible()
+    // Find stats section by using the grid container, then verify numbers within context
+    const statsGrid = page.locator('.grid.grid-cols-1.sm\\:grid-cols-2')
+
+    // Verify Interactive Projects stat
+    await expect(statsGrid.getByText('2').first()).toBeVisible()
+    await expect(statsGrid.getByText('Interactive Projects')).toBeVisible()
+
+    // Verify AI Experiments stat
+    await expect(statsGrid.getByText('3').first()).toBeVisible()
+    await expect(statsGrid.getByText('AI Experiments')).toBeVisible()
   })
 
   test('shows navigation with all menu items', async ({ page }) => {
