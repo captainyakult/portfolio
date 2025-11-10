@@ -111,18 +111,14 @@ export default function Hero() {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text mb-2">15+</div>
+            <div className="text-3xl font-bold gradient-text mb-2">2</div>
             <div className="text-text-secondary">Interactive Projects</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold gradient-text mb-2">8</div>
-            <div className="text-text-secondary">AI Experiments</div>
-          </div>
-          <div className="text-center">
             <div className="text-3xl font-bold gradient-text mb-2">3</div>
-            <div className="text-text-secondary">AI Systems</div>
+            <div className="text-text-secondary">AI Experiments</div>
           </div>
         </div>
       </div>
